@@ -103,6 +103,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
         public void cleanUp() {
             final Context context = mView.getContext();
+            imgRecipe.setVisibility(View.GONE);
             tvrecipeName.setVisibility(View.INVISIBLE);
             tvServingCount.setVisibility(View.GONE);
             tvStepCount.setVisibility(View.GONE);

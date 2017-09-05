@@ -18,6 +18,7 @@ public class PreferencesUtils {
 
     public PreferencesUtils(Context context){
         appPrefs = context.getSharedPreferences(PREFS_NAME,Context.MODE_PRIVATE);
+        imgPrefs = context.getSharedPreferences(IMG_CACHE_PREFS_NAME,Context.MODE_PRIVATE);
     }
 
     private String getString(String key,SharedPreferences preferences){

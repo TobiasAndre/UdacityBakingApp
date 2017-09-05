@@ -30,5 +30,6 @@ public class BakingApp extends Application {
         INSTANCE = this;
         Stetho.initializeWithDefaults(this);
         client = new OkHttpClient.Builder().addInterceptor(new StethoInterceptor()).build();
+        preferencesUtils = new PreferencesUtils(this);
     }
 }
