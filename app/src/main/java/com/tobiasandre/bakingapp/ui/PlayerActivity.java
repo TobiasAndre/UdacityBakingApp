@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.tobiasandre.bakingapp.R;
-import com.tobiasandre.bakingapp.model.Step;
+import com.tobiasandre.bakingapp.model.Recipe;
+
 
 public class PlayerActivity extends AppCompatActivity {
 
-    Step step;
+    public static final String ARG_STEP = "ARG_STEP";
+    public static final String ARG_POSITION = "ARG_POSITION";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,10 +20,10 @@ public class PlayerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_player);
 
         Bundle arguments = new Bundle();
-        arguments.putParcelable(RecipeDetailFragment.ARG_STEP,
-                getIntent().getParcelableExtra(RecipeDetailFragment.ARG_STEP));
+        arguments.putParcelable(ARG_STEP,
+                getIntent().getParcelableExtra(ARG_STEP));
+        arguments.putInt(ARG_POSITION,getIntent().getIntExtra(ARG_POSITION,0));
 
-        step = arguments.getParcelable(RecipeDetailFragment.ARG_STEP);
 
         Fragment fragment = new RecipeStepDetailFragment();
         fragment.setArguments(arguments);

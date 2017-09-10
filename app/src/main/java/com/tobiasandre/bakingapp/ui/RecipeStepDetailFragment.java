@@ -6,29 +6,38 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSource;
+import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveVideoTrackSelection;
+import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
+import com.tobiasandre.bakingapp.BakingApp;
 import com.tobiasandre.bakingapp.R;
-import com.tobiasandre.bakingapp.model.Step;
+import com.tobiasandre.bakingapp.model.Recipe;
+
 
 /**
  * Created by Tobias Andre on 31/08/2017.
@@ -40,15 +49,22 @@ public class RecipeStepDetailFragment extends Fragment {
     private SimpleExoPlayer player;
     private BandwidthMeter bandwidthMeter;
     private Handler mainHandler;
-    private Step step;
+    private Recipe mRecipe;
+    private TextView mTextRecpipeDetailStep;
+    private TextView mTextInfoSteps;
+    private Button mButtonNext;
+    private Button mButtonPrev;
+    private int mPosition = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        step = new Step();
-
-        if (getArguments().containsKey(RecipeDetailFragment.ARG_STEP)) {
-            step = getArguments().getParcelable(RecipeDetailFragment.ARG_STEP);
+        mRecipe = new Recipe();
+        if (getArguments().containsKey(PlayerActivity.ARG_STEP)) {
+            mRecipe = getArguments().getParcelable(PlayerActivity.ARG_STEP);
+        }
+        if(getArguments().containsKey(PlayerActivity.ARG_POSITION)){
+            mPosition = getArguments().getInt(PlayerActivity.ARG_POSITION);
         }
     }
 
@@ -56,34 +72,123 @@ public class RecipeStepDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mainHandler = new Handler();
         bandwidthMeter = new DefaultBandwidthMeter();
+
         View rootView = inflater.inflate(R.layout.recipe_step_detail_fragment_body_part, container, false);
 
+        mTextRecpipeDetailStep = (TextView)rootView.findViewById(R.id.recipe_step_detail_text);
+        mTextInfoSteps = (TextView)rootView.findViewById(R.id.tv_info_steps);
+        mButtonPrev = (Button)rootView.findViewById(R.id.previousStep);
+        mButtonNext = (Button)rootView.findViewById(R.id.nextStep);
         simpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
         simpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
 
-        initializePlayer(Uri.parse(step.getVideoURL()));
+        showStepAt(mPosition);
+
+        if(mButtonPrev!=null){
+            mButtonPrev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mPosition--;
+                    showStepAt(mPosition);
+                }
+            });
+        }
+        if(mButtonNext!=null){
+            mButtonNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mPosition++;
+                    showStepAt(mPosition);
+                }
+            });
+        }
+
 
         return rootView;
     }
 
     private void initializePlayer(Uri mediaUri) {
         if (player == null) {
-            TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveVideoTrackSelection.Factory(bandwidthMeter);
-            DefaultTrackSelector trackSelector = new DefaultTrackSelector(mainHandler, videoTrackSelectionFactory);
-            LoadControl loadControl = new DefaultLoadControl();
+            try {
 
-            player = ExoPlayerFactory.newSimpleInstance(getActivity(), trackSelector, loadControl);
-            simpleExoPlayerView.setPlayer(player);
+                player = ExoPlayerFactory.newSimpleInstance(
+                        BakingApp.get()
+                        , new DefaultTrackSelector());
 
-            String userAgent = Util.getUserAgent(getActivity(), "Baking App");
-            MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
-            player.prepare(mediaSource);
-            player.setPlayWhenReady(true);
+                simpleExoPlayerView.setPlayer(player);
+
+                String userAgent = Util.getUserAgent(getContext(), "Baking App");
+                MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
+
+                player.prepare(mediaSource);
+                player.setPlayWhenReady(true);
+
+
+            }catch (Exception error){
+                System.out.println(error.getMessage());
+            }
         }
     }
 
-    public boolean isInLandscapeMode( Context context ) {
-        return (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE);
+    public void showStepAt(int position){
+        player = null;
+        if(position > (mRecipe.getSteps().size()-1)){
+            position = 0;
+        }
+        if(position<0){
+            position = mRecipe.getSteps().size()-1;
+        }
+        if(mTextInfoSteps!=null){
+            mTextInfoSteps.setText(""+position+"/"+(mRecipe.getSteps().size()-1));
+        }
+        if(mTextRecpipeDetailStep!=null) {
+            mTextRecpipeDetailStep.setText(mRecipe.getSteps().get(position).getDescription());
+        }
+        if(simpleExoPlayerView!=null) {
+            if(!mRecipe.getSteps().get(position).getVideoURL().isEmpty()) {
+                simpleExoPlayerView.setVisibility(View.VISIBLE);
+                initializePlayer(Uri.parse(mRecipe.getSteps().get(position).getVideoURL()));
+            }else{
+                simpleExoPlayerView.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        if (player!=null) {
+            player.stop();
+            player.release();
+        }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (player!=null) {
+            player.stop();
+            player.release();
+            player=null;
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (player!=null) {
+            player.stop();
+            player.release();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (player!=null) {
+            player.stop();
+            player.release();
+        }
     }
 
 }

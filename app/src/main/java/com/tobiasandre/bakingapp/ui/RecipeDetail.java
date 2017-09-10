@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import com.tobiasandre.bakingapp.R;
-import com.tobiasandre.bakingapp.model.Recipe;
+
 
 public class RecipeDetail extends AppCompatActivity {
 
@@ -21,14 +21,10 @@ public class RecipeDetail extends AppCompatActivity {
             arguments.putParcelable(ARG_RECIPE,
                     getIntent().getParcelableExtra(ARG_RECIPE));
 
-            Recipe recipe = arguments.getParcelable(ARG_RECIPE);
-
             Fragment fragment = new RecipeDetailFragment();
             fragment.setArguments(arguments);
             FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
-
+            fragmentManager.beginTransaction().replace(R.id.fragmentFrame, fragment).commit();
 
         }
     }

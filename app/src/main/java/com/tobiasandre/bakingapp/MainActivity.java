@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity
         mRecyclerView = (RecyclerView)findViewById(R.id.rv_recipes);
         mProgressBar = (ProgressBar)findViewById(R.id.progress_bar);//arrumar bind
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity
     private void getRecipes(){
         GetRecipesTask.NotifyTaskCompletedCommand command =
                 new GetRecipesTask.NotifyTaskCompletedCommand(this);
-        new GetRecipesTask(command,this).execute();
+        new GetRecipesTask(command).execute();
     }
 
     @Override

@@ -2,7 +2,7 @@ package com.tobiasandre.bakingapp.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
+
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,11 +15,10 @@ import com.squareup.picasso.Picasso;
 import com.tobiasandre.bakingapp.R;
 import com.tobiasandre.bakingapp.model.Recipe;
 import com.tobiasandre.bakingapp.ui.RecipeDetail;
-import com.tobiasandre.bakingapp.util.ImageRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+
 
 /**
  * Created by Tobias Andre on 29/08/2017.
@@ -63,7 +62,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         holder.tvrecipeName.setText(recipe.getName());
         holder.tvStepCount.setText(""+recipe.getSteps().size());
         holder.tvServingCount.setText(""+recipe.getServings());
-
+        holder.tvIngredientsCount.setText(""+recipe.getIngredients().size());
         if (TextUtils.isEmpty(recipe.getImage()) == false) {
             Picasso.with(mContext)
                     .load(recipe.getImage())
@@ -88,7 +87,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        TextView tvServingCount, tvStepCount;
+        TextView tvServingCount, tvStepCount ,tvIngredientsCount;
         TextView tvrecipeName;
         ImageView imgRecipe;
 
@@ -97,6 +96,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
             tvrecipeName = (TextView)view.findViewById(R.id.tv_recipe_name);
             tvServingCount = (TextView)view.findViewById(R.id.tv_number_serves);
             tvStepCount = (TextView)view.findViewById(R.id.tv_number_steps);
+            tvIngredientsCount = (TextView)view.findViewById(R.id.ingredient_count_text);
             imgRecipe = (ImageView)view.findViewById(R.id.img_recipe);
             mView = view;
         }
@@ -106,6 +106,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
             imgRecipe.setVisibility(View.GONE);
             tvrecipeName.setVisibility(View.INVISIBLE);
             tvServingCount.setVisibility(View.GONE);
+            tvIngredientsCount.setVisibility(View.GONE);
             tvStepCount.setVisibility(View.GONE);
         }
     }

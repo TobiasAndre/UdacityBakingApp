@@ -23,7 +23,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GetRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
 
     public static String TAG = GetRecipesTask.class.getSimpleName();
-    private final Context mContext;
     private final NotifyTaskCompletedCommand mCommand;
     private ImageRepository mImageRepository;
 
@@ -49,9 +48,8 @@ public class GetRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
         }
     }
 
-    public GetRecipesTask(NotifyTaskCompletedCommand command,Context context) {
+    public GetRecipesTask(NotifyTaskCompletedCommand command) {
         mCommand = command;
-        this.mContext = context;
     }
 
     @Override
