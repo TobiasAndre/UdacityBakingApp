@@ -31,7 +31,6 @@ public class Recipe implements Parcelable{
     @Expose
     private List<Step> steps = null;
 
-
     @SerializedName("servings")
     @Expose
     private Integer servings;

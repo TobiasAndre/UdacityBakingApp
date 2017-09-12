@@ -14,22 +14,22 @@ import okhttp3.OkHttpClient;
 
 public class BakingApp extends Application {
 
-    private static BakingApp INSTANCE;
+    private static BakingApp Instance;
 
-    public OkHttpClient client = new OkHttpClient();
+    public OkHttpClient clientHttp = new OkHttpClient();
     public PreferencesUtils preferencesUtils;
 
     public static BakingApp get() {
-        return INSTANCE;
+        return Instance;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        INSTANCE = this;
+        Instance = this;
         Stetho.initializeWithDefaults(this);
-        client = new OkHttpClient.Builder().addInterceptor(new StethoInterceptor()).build();
+        clientHttp = new OkHttpClient.Builder().addInterceptor(new StethoInterceptor()).build();
         preferencesUtils = new PreferencesUtils(this);
     }
 }

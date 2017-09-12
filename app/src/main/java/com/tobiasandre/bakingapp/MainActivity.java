@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         mRecyclerView = (RecyclerView)findViewById(R.id.rv_recipes);
-        mProgressBar = (ProgressBar)findViewById(R.id.progress_bar);//arrumar bind
+        mProgressBar = (ProgressBar)findViewById(R.id.progress_bar);
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        getSupportActionBar().setTitle("Baking App");
+        getSupportActionBar().setTitle(getString(R.string.app_name));
 
         mAdapter = new RecipesAdapter(new ArrayList<Recipe>(),this);
         mRecyclerView.setAdapter(mAdapter);

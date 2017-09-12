@@ -1,9 +1,11 @@
 <resources>
-    <string name="app_name">BakingApp</string>
+    <string name="app_name">Baking App</string>
     <string name="hint_serves">Serves: </string>
-    <string name="hint_steps">Steps: </string>
+    <string name="hint_steps">Steps</string>
     <string name="hint_recipe">Recipe name:</string>
-    <string name="hint_ingredients">Ingredientes: </string>
-
+    <string name="hint_ingredients">Ingredients</string>
+    <string name="app_widget_text"></string>
+    <string name="add_widget">Add widget</string>
     <string name="config_menu">Configurations</string>
+    <string name="default_error_mesage">Erro</string>
 </resources>

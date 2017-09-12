@@ -25,7 +25,6 @@ public class RecipeDetail extends AppCompatActivity {
             fragment.setArguments(arguments);
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.fragmentFrame, fragment).commit();
-
         }
     }
 }

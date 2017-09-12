@@ -14,7 +14,7 @@ public class ImageRepository implements ImageDataSource {
     OkHttpClient okHttpClient;
 
     public ImageRepository() {
-        this.okHttpClient = BakingApp.get().client;
+        this.okHttpClient = BakingApp.get().clientHttp;
     }
 
     @Override public Single<String> getImage(String recipeName) {

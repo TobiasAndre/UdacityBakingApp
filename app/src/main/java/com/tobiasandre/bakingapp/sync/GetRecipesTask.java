@@ -60,7 +60,6 @@ public class GetRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
             mCommand.mRecipes = new ArrayList<>();
         }
         mCommand.execute();
-
     }
 
     @Override
@@ -83,18 +82,12 @@ public class GetRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
                 if(!TextUtils.isEmpty(imgUrl)){
                     r.setImage(imgUrl);
                 }
-
             }
-
             return recipesList;
-
         } catch (IOException e) {
             Log.e(TAG, "Ocorreu um problema ao obter as receitas:"+e.getMessage(), e);
         }
         return null;
     }
-
-
-
 }
 

@@ -1,33 +1,21 @@
 package com.tobiasandre.bakingapp.ui;
 
-
-import android.content.Context;
-import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
-import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSource;
-import com.google.android.exoplayer2.ext.okhttp.OkHttpDataSourceFactory;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
-import com.google.android.exoplayer2.trackselection.TrackSelection;
-import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
@@ -102,27 +90,23 @@ public class RecipeStepDetailFragment extends Fragment {
                 }
             });
         }
-
-
         return rootView;
     }
 
     private void initializePlayer(Uri mediaUri) {
         if (player == null) {
             try {
-
                 player = ExoPlayerFactory.newSimpleInstance(
                         BakingApp.get()
                         , new DefaultTrackSelector());
 
                 simpleExoPlayerView.setPlayer(player);
 
-                String userAgent = Util.getUserAgent(getContext(), "Baking App");
+                String userAgent = Util.getUserAgent(getContext(), getString(R.string.app_name));
                 MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
 
                 player.prepare(mediaSource);
                 player.setPlayWhenReady(true);
-
 
             }catch (Exception error){
                 System.out.println(error.getMessage());
@@ -190,5 +174,4 @@ public class RecipeStepDetailFragment extends Fragment {
             player.release();
         }
     }
-
 }

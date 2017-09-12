@@ -30,7 +30,7 @@ public class SearchImage {
 
         Request request = new Request.Builder().url(url).build();
 
-        return Single.fromCallable(() -> BakingApp.get().client.newCall(request).execute()).map(response -> {
+        return Single.fromCallable(() -> BakingApp.get().clientHttp.newCall(request).execute()).map(response -> {
             String string = getFirstImageFromJson(response.body().string());
             //cache the result because search api free is limited to 100 requests a day
             BakingApp.get().preferencesUtils.saveRecipeImage(query,string);
