@@ -73,21 +73,15 @@ public class RecipeStepDetailFragment extends Fragment {
         showStepAt(mPosition);
 
         if(mButtonPrev!=null){
-            mButtonPrev.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mPosition--;
-                    showStepAt(mPosition);
-                }
+            mButtonPrev.setOnClickListener(view -> {
+                mPosition--;
+                showStepAt(mPosition);
             });
         }
         if(mButtonNext!=null){
-            mButtonNext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mPosition++;
-                    showStepAt(mPosition);
-                }
+            mButtonNext.setOnClickListener(view -> {
+                mPosition++;
+                showStepAt(mPosition);
             });
         }
         return rootView;

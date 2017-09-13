@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tobiasandre.bakingapp.R;
 import com.tobiasandre.bakingapp.model.Step;

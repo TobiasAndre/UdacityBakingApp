@@ -43,7 +43,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.recipe_list_item, parent, false);
-        final Context context = view.getContext();
 
 
         return new ViewHolder(view);
@@ -69,13 +68,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
                     .into(holder.imgRecipe);
         }
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentDetail = new Intent(mContext, RecipeDetail.class);
-                intentDetail.putExtra(RecipeDetail.ARG_RECIPE, recipe);
-                mContext.startActivity(intentDetail);
-            }
+        holder.mView.setOnClickListener(v -> {
+            Intent intentDetail = new Intent(mContext, RecipeDetail.class);
+            intentDetail.putExtra(RecipeDetail.ARG_RECIPE, recipe);
+            mContext.startActivity(intentDetail);
         });
     }
 
@@ -102,7 +98,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         }
 
         public void cleanUp() {
-            final Context context = mView.getContext();
             imgRecipe.setVisibility(View.GONE);
             tvrecipeName.setVisibility(View.INVISIBLE);
             tvServingCount.setVisibility(View.GONE);

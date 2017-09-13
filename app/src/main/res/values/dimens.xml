@@ -13,4 +13,5 @@
     <dimen name="detail_title_left_padding">4dp</dimen>
     <dimen name="min_space">8dp</dimen>
     <dimen name="max_space">32dp</dimen>
+    <dimen name="base_padding">8dp</dimen>
 </resources>

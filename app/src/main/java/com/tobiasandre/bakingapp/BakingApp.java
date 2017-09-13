@@ -4,7 +4,10 @@ import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.tobiasandre.bakingapp.model.Recipe;
 import com.tobiasandre.bakingapp.util.PreferencesUtils;
+
+import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 
@@ -15,7 +18,7 @@ import okhttp3.OkHttpClient;
 public class BakingApp extends Application {
 
     private static BakingApp Instance;
-
+    public ArrayList<Recipe> mRecipes;
     public OkHttpClient clientHttp = new OkHttpClient();
     public PreferencesUtils preferencesUtils;
 
@@ -26,7 +29,7 @@ public class BakingApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        mRecipes = new ArrayList<>();
         Instance = this;
         Stetho.initializeWithDefaults(this);
         clientHttp = new OkHttpClient.Builder().addInterceptor(new StethoInterceptor()).build();

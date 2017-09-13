@@ -10,8 +10,7 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:padding="@dimen/min_space"
-        android:background="?attr/selectableItemBackground"
-        >
+        android:background="?attr/selectableItemBackground">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,8 +19,7 @@
             android:textSize="18sp"
             android:textColor="#000"
             android:textStyle="bold"
-            android:id="@+id/number"
-            />
+            android:id="@+id/number"/>
 
         <TextView
             android:layout_width="wrap_content"

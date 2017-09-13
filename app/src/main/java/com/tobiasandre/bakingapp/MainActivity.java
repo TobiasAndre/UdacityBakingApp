@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle(getString(R.string.app_name));
 
-        mAdapter = new RecipesAdapter(new ArrayList<Recipe>(),this);
+        mAdapter = new RecipesAdapter(new ArrayList<>(),this);
         mRecyclerView.setAdapter(mAdapter);
 
         getRecipes();
@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity
     public void onGetFinished(CommandExec command) {
         if (command instanceof GetRecipesTask.NotifyTaskCompletedCommand) {
             try {
+                BakingApp.get().mRecipes = (ArrayList<Recipe>) ((GetRecipesTask.NotifyTaskCompletedCommand) command).getRecipes();
                 mAdapter.add(((GetRecipesTask.NotifyTaskCompletedCommand) command).getRecipes());
             }catch (Exception error){
                 System.out.println(error.getMessage());

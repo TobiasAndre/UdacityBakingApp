@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.tobiasandre.bakingapp.R;
-import com.tobiasandre.bakingapp.model.Recipe;
 
 
 public class PlayerActivity extends AppCompatActivity {
