@@ -38,7 +38,6 @@ public class WidgetConfiguration extends Activity implements RecipesAdapter.Call
         setContentView(R.layout.widget_configure);
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
 
-        // Find the widget id from the intent.
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
@@ -46,7 +45,6 @@ public class WidgetConfiguration extends Activity implements RecipesAdapter.Call
                     extras.getInt(AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-        // If this activity was started with an intent without an app widget ID, finish with an error.
         if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
             finish();
             return;

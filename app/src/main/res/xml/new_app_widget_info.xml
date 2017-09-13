@@ -6,5 +6,6 @@
     android:initialLayout="@layout/widget_recipe"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen"
+    android:configure="com.tobiasandre.bakingapp.widget.WidgetConfiguration"
     android:initialKeyguardLayout="@layout/widget_recipe">
 </appwidget-provider>

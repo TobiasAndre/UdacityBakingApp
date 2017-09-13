@@ -72,6 +72,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
             Intent intentDetail = new Intent(mContext, RecipeDetail.class);
             intentDetail.putExtra(RecipeDetail.ARG_RECIPE, recipe);
             mContext.startActivity(intentDetail);
+            mCallbacks.open(recipe,position);
         });
     }
 
