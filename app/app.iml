@@ -107,7 +107,6 @@
     <orderEntry type="library" exported="" name="reactive-streams-1.0.0" level="project" />
     <orderEntry type="library" exported="" name="guava-18.0" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="exposed-instrumentation-api-publish-0.5" level="project" />
-    <orderEntry type="library" exported="" name="butterknife-annotations-8.6.0" level="project" />
     <orderEntry type="library" exported="" name="support-core-utils-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="auto-service-1.0-rc2" level="project" />
     <orderEntry type="library" exported="" name="support-vector-drawable-26.0.0-alpha1" level="project" />
@@ -116,7 +115,6 @@
     <orderEntry type="library" exported="" name="extension-okhttp-r2.5.1" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="javawriter-2.1.1" level="project" />
     <orderEntry type="library" exported="" name="exoplayer-ui-r2.5.1" level="project" />
-    <orderEntry type="library" exported="" name="butterknife-8.6.0" level="project" />
     <orderEntry type="library" exported="" name="support-annotations-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="support-core-ui-26.0.0-alpha1" level="project" />
     <orderEntry type="library" exported="" name="picasso-2.5.2" level="project" />

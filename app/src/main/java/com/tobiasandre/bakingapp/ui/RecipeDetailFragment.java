@@ -32,10 +32,6 @@ import java.util.List;
 public class RecipeDetailFragment extends Fragment implements StepItemView.Callbacks {
 
     private Recipe mRecipe;
-    private LinearLayout mLinearLayoutIngredients;
-    private LinearLayout mLinearLayoutSteps;
-    public static final String ARG_STEP = "ARG_STEP";
-    public static final String ARG_POSITION = "ARG_POSITION";
     public RecipeDetailFragment(){
 
     }
@@ -74,14 +70,14 @@ public class RecipeDetailFragment extends Fragment implements StepItemView.Callb
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
 
-        mLinearLayoutIngredients = (LinearLayout)rootView.findViewById(R.id.ingredient_layout_list);
+        LinearLayout mLinearLayoutIngredients = (LinearLayout)rootView.findViewById(R.id.ingredient_layout_list);
         if(mLinearLayoutIngredients!=null){
             for(Ingredient ingredient : mRecipe.getIngredients()){
                 mLinearLayoutIngredients.addView(new IngredientItemView(getContext()).bind(ingredient));
             }
         }
 
-        mLinearLayoutSteps = (LinearLayout)rootView.findViewById(R.id.steps_layout_list);
+        LinearLayout mLinearLayoutSteps = (LinearLayout)rootView.findViewById(R.id.steps_layout_list);
         if(mLinearLayoutSteps!=null){
             int index = 0;
             for(Step step : mRecipe.getSteps()){
@@ -99,11 +95,10 @@ public class RecipeDetailFragment extends Fragment implements StepItemView.Callb
 
     @Override
     public void open(List<Step> steps,int position) {
-        ArrayList<Step> mSteps = (ArrayList<Step>) steps;
-        showStep(mSteps,position);
+        showStep(position);
     }
 
-    private void showStep(ArrayList<Step> steps, int position){
+    private void showStep(int position){
         try {
             Intent intentPlayer = new Intent(getActivity(), PlayerActivity.class);
 

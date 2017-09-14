@@ -35,13 +35,9 @@ public class RecipeStepDetailFragment extends Fragment {
 
     private SimpleExoPlayerView simpleExoPlayerView;
     private SimpleExoPlayer player;
-    private BandwidthMeter bandwidthMeter;
-    private Handler mainHandler;
     private Recipe mRecipe;
     private TextView mTextRecpipeDetailStep;
     private TextView mTextInfoSteps;
-    private Button mButtonNext;
-    private Button mButtonPrev;
     private int mPosition = 0;
 
     @Override
@@ -58,15 +54,15 @@ public class RecipeStepDetailFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        mainHandler = new Handler();
-        bandwidthMeter = new DefaultBandwidthMeter();
+        Handler mainHandler = new Handler();
+        BandwidthMeter bandwidthMeter = new DefaultBandwidthMeter();
 
         View rootView = inflater.inflate(R.layout.recipe_step_detail_fragment_body_part, container, false);
 
         mTextRecpipeDetailStep = (TextView)rootView.findViewById(R.id.recipe_step_detail_text);
         mTextInfoSteps = (TextView)rootView.findViewById(R.id.tv_info_steps);
-        mButtonPrev = (Button)rootView.findViewById(R.id.previousStep);
-        mButtonNext = (Button)rootView.findViewById(R.id.nextStep);
+        Button mButtonPrev = (Button)rootView.findViewById(R.id.previousStep);
+        Button mButtonNext = (Button)rootView.findViewById(R.id.nextStep);
         simpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
         simpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
 
@@ -109,7 +105,12 @@ public class RecipeStepDetailFragment extends Fragment {
     }
 
     public void showStepAt(int position){
-        player = null;
+        if(player!=null){
+            player.stop();
+            player.release();
+            player = null;
+        }
+
         if(position > (mRecipe.getSteps().size()-1)){
             position = 0;
         }

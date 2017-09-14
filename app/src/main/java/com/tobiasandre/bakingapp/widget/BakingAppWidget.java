@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.google.gson.Gson;
-import com.tobiasandre.bakingapp.BakingApp;
 import com.tobiasandre.bakingapp.R;
 import com.tobiasandre.bakingapp.model.Recipe;
-import com.tobiasandre.bakingapp.util.PreferencesUtils;
 
 /**
  * Created by Tobias Andre on 11/09/2017.
@@ -22,16 +20,10 @@ public class BakingAppWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        PreferencesUtils widgetPreferencesUtils =
-                new PreferencesUtils(context, PreferencesUtils.WIDGET_PREFS_NAME);
-        int recipeId;
 
         mRecipe = null;
 
         for (int appWidgetId : appWidgetIds) {
-            recipeId = widgetPreferencesUtils.getWidgetRecipeId(appWidgetId);
-            mRecipe = BakingApp.get().mRecipes.get(1);
-
             updateAppWidget(context, appWidgetManager, appWidgetId,mRecipe);
         }
     }
@@ -52,10 +44,12 @@ public class BakingAppWidget extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_recipe);
 
-        views.setTextViewText(R.id.widget_text, recipe.getName());
-        Intent intent = new Intent(context, ListWidgetService.class);
-        intent.putExtra(ListWidgetService.KEY_RECIPE, new Gson().toJson(recipe));
-        views.setRemoteAdapter(R.id.widget_list, intent);
+        if(recipe !=null) {
+            views.setTextViewText(R.id.widget_text, recipe.getName());
+            Intent intent = new Intent(context, ListWidgetService.class);
+            intent.putExtra(ListWidgetService.KEY_RECIPE, new Gson().toJson(recipe));
+            views.setRemoteAdapter(R.id.widget_list, intent);
+        }
         appWidgetManager.updateAppWidget(appWidgetId, views);
 
     }

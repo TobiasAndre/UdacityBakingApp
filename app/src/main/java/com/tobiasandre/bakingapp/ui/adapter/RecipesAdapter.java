@@ -29,13 +29,15 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
     private final static String TAG = RecipesAdapter.class.getSimpleName();
     private final ArrayList<Recipe> mRecipes;
     private final Callbacks mCallbacks;
+    private final boolean mIsWidget;
 
     public interface Callbacks {
         void open(Recipe recipe, int position);
     }
 
-    public RecipesAdapter(ArrayList<Recipe> recipes, Callbacks callbacks) {
+    public RecipesAdapter(ArrayList<Recipe> recipes,boolean widget, Callbacks callbacks) {
         mRecipes = recipes;
+        mIsWidget = widget;
         this.mCallbacks = callbacks;
     }
 
@@ -69,10 +71,13 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         }
 
         holder.mView.setOnClickListener(v -> {
-            Intent intentDetail = new Intent(mContext, RecipeDetail.class);
-            intentDetail.putExtra(RecipeDetail.ARG_RECIPE, recipe);
-            mContext.startActivity(intentDetail);
-            mCallbacks.open(recipe,position);
+            if(!mIsWidget) {
+                Intent intentDetail = new Intent(mContext, RecipeDetail.class);
+                intentDetail.putExtra(RecipeDetail.ARG_RECIPE, recipe);
+                mContext.startActivity(intentDetail);
+            }else {
+                mCallbacks.open(recipe, position);
+            }
         });
     }
 

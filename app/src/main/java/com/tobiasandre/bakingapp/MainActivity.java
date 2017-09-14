@@ -24,25 +24,22 @@ public class MainActivity extends AppCompatActivity
 
     private RecipesAdapter mAdapter;
     private ProgressBar mProgressBar;
-    private Toolbar mToolbar;
-    private RecyclerView mRecyclerView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mRecyclerView = (RecyclerView)findViewById(R.id.rv_recipes);
+        RecyclerView mRecyclerView = (RecyclerView)findViewById(R.id.rv_recipes);
         mProgressBar = (ProgressBar)findViewById(R.id.progress_bar);
-        mToolbar = (Toolbar)findViewById(R.id.toolbar);
+        Toolbar mToolbar = (Toolbar)findViewById(R.id.toolbar);
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setHomeButtonEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         getSupportActionBar().setTitle(getString(R.string.app_name));
 
-        mAdapter = new RecipesAdapter(new ArrayList<>(),this);
+        mAdapter = new RecipesAdapter(new ArrayList<>(),false,this);
         mRecyclerView.setAdapter(mAdapter);
 
         getRecipes();

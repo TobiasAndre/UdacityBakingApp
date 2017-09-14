@@ -23,7 +23,6 @@ public class GetRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
 
     public static String TAG = GetRecipesTask.class.getSimpleName();
     private final NotifyTaskCompletedCommand mCommand;
-    private ImageRepository mImageRepository;
 
     public interface Listener {
         void onGetFinished(CommandExec command);
@@ -64,7 +63,7 @@ public class GetRecipesTask extends AsyncTask<Void, Void, List<Recipe>> {
     @Override
     protected List<Recipe> doInBackground(Void... params) {
 
-        mImageRepository = new ImageRepository();
+        ImageRepository mImageRepository = new ImageRepository();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/")

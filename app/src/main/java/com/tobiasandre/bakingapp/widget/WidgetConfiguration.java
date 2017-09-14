@@ -2,6 +2,7 @@ package com.tobiasandre.bakingapp.widget;
 
 import android.app.Activity;
 import android.appwidget.AppWidgetManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,6 +12,7 @@ import com.tobiasandre.bakingapp.BakingApp;
 import com.tobiasandre.bakingapp.R;
 import com.tobiasandre.bakingapp.model.Recipe;
 import com.tobiasandre.bakingapp.ui.adapter.RecipesAdapter;
+
 
 
 /**
@@ -51,15 +53,22 @@ public class WidgetConfiguration extends Activity implements RecipesAdapter.Call
         }
 
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-        RecipesAdapter adapter = new RecipesAdapter(BakingApp.get().mRecipes,this);
+        RecipesAdapter adapter = new RecipesAdapter(BakingApp.get().mRecipes,true,this);
         mRecyclerView.setAdapter(adapter);
-
     }
 
     @Override
     public void open(Recipe recipe, int position) {
+        final Context context = WidgetConfiguration.this;
         BakingApp.get().preferencesUtils.setWidgetRecipeId(mAppWidgetId, recipe.getId());
+
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        BakingAppWidget.updateAppWidget(context, appWidgetManager, mAppWidgetId,recipe);
+
+        Intent resultValue = new Intent();
+        resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
+        setResult(RESULT_OK, resultValue);
+        finish();
     }
 
 

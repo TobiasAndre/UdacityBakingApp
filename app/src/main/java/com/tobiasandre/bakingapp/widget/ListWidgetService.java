@@ -17,13 +17,14 @@ import java.util.List;
  * Created by Tobias Andre on 13/09/2017.
  */
 
-public class ListWidgetService extends RemoteViewsService {
+public class ListWidgetService extends RemoteViewsService  {
 
     public static final String KEY_RECIPE = "INGREDIENTS";
 
     @Override public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new RemoteViewFactory(getApplicationContext(),intent);
     }
+
 
     class RemoteViewFactory implements RemoteViewsService.RemoteViewsFactory {
 
@@ -83,4 +84,6 @@ public class ListWidgetService extends RemoteViewsService {
             return true;
         }
     }
+
+
 }
