@@ -25,7 +25,6 @@ public class ListWidgetService extends RemoteViewsService  {
         return new RemoteViewFactory(getApplicationContext(),intent);
     }
 
-
     class RemoteViewFactory implements RemoteViewsService.RemoteViewsFactory {
 
         private final Context context;
