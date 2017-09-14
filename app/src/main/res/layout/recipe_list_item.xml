@@ -30,7 +30,8 @@
                 android:scaleType="centerCrop"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/recipe" />
+                tools:src="@drawable/recipe"
+                android:contentDescription="@string/app_name" />
 
             <TextView
                 android:id="@+id/tv_recipe_name"
@@ -60,6 +61,7 @@
                 android:layout_marginTop="0dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/ic_53784"
+                android:contentDescription="@string/hint_ingredients"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintLeft_toRightOf="@+id/imageView3"
                 app:layout_constraintRight_toRightOf="parent"
@@ -75,6 +77,7 @@
                 android:layout_marginTop="32dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_restaurant"
+                android:contentDescription="@string/hint_serves"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintLeft_toRightOf="@+id/img_recipe"
                 app:layout_constraintRight_toRightOf="parent"
@@ -90,6 +93,7 @@
                 android:layout_marginTop="-2dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_etapas"
+                android:contentDescription="@string/hint_steps"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintLeft_toRightOf="@+id/img_recipe"
                 app:layout_constraintRight_toLeftOf="@+id/imageView3"
