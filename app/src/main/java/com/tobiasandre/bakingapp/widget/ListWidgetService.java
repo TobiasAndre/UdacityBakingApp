@@ -27,18 +27,18 @@ public class ListWidgetService extends RemoteViewsService  {
 
     class RemoteViewFactory implements RemoteViewsService.RemoteViewsFactory {
 
-        private final Context context;
-        private final Intent intent;
-        private List<Ingredient> ingredients = new ArrayList<>();
+        private final Context mContext;
+        private final Intent mIntent;
+        private List<Ingredient> mIngredients = new ArrayList<>();
 
         public RemoteViewFactory(Context context, Intent intent) {
-            this.context = context;
-            this.intent = intent;
+            this.mContext = context;
+            this.mIntent = intent;
         }
 
         @Override public void onCreate() {
-            Recipe recipe = new Gson().fromJson(intent.getStringExtra(KEY_RECIPE), Recipe.class);
-            ingredients = recipe.getIngredients();
+            Recipe recipe = new Gson().fromJson(mIntent.getStringExtra(KEY_RECIPE), Recipe.class);
+            mIngredients = recipe.getIngredients();
         }
 
         @Override public void onDataSetChanged() {
@@ -48,15 +48,15 @@ public class ListWidgetService extends RemoteViewsService  {
         }
 
         @Override public int getCount() {
-            return ingredients.size();
+            return mIngredients.size();
         }
 
         @Override public RemoteViews getViewAt(int position) {
 
-            Ingredient ingredient = ingredients.get(position);
+            Ingredient ingredient = mIngredients.get(position);
 
             RemoteViews views =
-                    new RemoteViews(context.getPackageName(), R.layout.widget_recipe_ingredient);
+                    new RemoteViews(mContext.getPackageName(), R.layout.widget_recipe_ingredient);
 
             views.setTextViewText(R.id.recipe_ingredient_quantity, String.valueOf(ingredient.getQuantity()));
             views.setTextViewText(R.id.unit, ingredient.getMeasure());

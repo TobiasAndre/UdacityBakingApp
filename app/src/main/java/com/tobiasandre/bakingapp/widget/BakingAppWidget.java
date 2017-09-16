@@ -16,7 +16,7 @@ import com.tobiasandre.bakingapp.model.Recipe;
 
 public class BakingAppWidget extends AppWidgetProvider {
 
-    Recipe mRecipe;
+    private Recipe mRecipe;
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
