@@ -18,9 +18,9 @@ import java.util.List;
 
 public class StepItemView extends LinearLayout {
 
-    TextView number;
-    TextView name;
-    ImageView videoIcon;
+    private TextView mNumber;
+    private TextView mName;
+    private ImageView mVideoIcon;
 
     private final Callbacks mCallbacks;
 
@@ -32,21 +32,21 @@ public class StepItemView extends LinearLayout {
     public StepItemView(Context context,Callbacks callbacks){
         super(context);
         View view = inflate(getContext(), R.layout.item_step,this);
-        number = (TextView)view.findViewById(R.id.number);
-        name = (TextView)view.findViewById(R.id.item_name);
-        videoIcon = (ImageView)view.findViewById(R.id.video);
+        mNumber = (TextView)view.findViewById(R.id.number);
+        mName = (TextView)view.findViewById(R.id.item_name);
+        mVideoIcon = (ImageView)view.findViewById(R.id.video);
         this.mCallbacks = callbacks;
     }
 
     public View bind(List<Step> steps,int position){
 
-        number.setText(String.valueOf(steps.get(position).getIndex())+".");
-        name.setText(steps.get(position).getShortDescription());
+        mNumber.setText(String.valueOf(steps.get(position).getIndex())+".");
+        mName.setText(steps.get(position).getShortDescription());
         if(steps.get(position).getVideoURL()==null || steps.get(position).getVideoURL().isEmpty())
-            videoIcon.setVisibility(INVISIBLE);
+            mVideoIcon.setVisibility(INVISIBLE);
 
         //for testing
-        videoIcon.setContentDescription(steps.get(position).getIndex() + "");
+        mVideoIcon.setContentDescription(steps.get(position).getIndex() + "");
         this.setOnClickListener(view -> {
             if(mCallbacks!=null){
                 mCallbacks.open(steps,position);

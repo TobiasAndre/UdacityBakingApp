@@ -33,8 +33,8 @@ import com.tobiasandre.bakingapp.model.Recipe;
 
 public class RecipeStepDetailFragment extends Fragment {
 
-    private SimpleExoPlayerView simpleExoPlayerView;
-    private SimpleExoPlayer player;
+    private SimpleExoPlayerView mSimpleExoPlayerView;
+    private SimpleExoPlayer mPlayer;
     private Recipe mRecipe;
     private TextView mTextRecpipeDetailStep;
     private TextView mTextInfoSteps;
@@ -63,8 +63,8 @@ public class RecipeStepDetailFragment extends Fragment {
         mTextInfoSteps = (TextView)rootView.findViewById(R.id.tv_info_steps);
         Button mButtonPrev = (Button)rootView.findViewById(R.id.previousStep);
         Button mButtonNext = (Button)rootView.findViewById(R.id.nextStep);
-        simpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
-        simpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
+        mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.playerView);
+        mSimpleExoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_FIT);
 
         showStepAt(mPosition);
 
@@ -84,19 +84,19 @@ public class RecipeStepDetailFragment extends Fragment {
     }
 
     private void initializePlayer(Uri mediaUri) {
-        if (player == null) {
+        if (mPlayer == null) {
             try {
-                player = ExoPlayerFactory.newSimpleInstance(
+                mPlayer = ExoPlayerFactory.newSimpleInstance(
                         BakingApp.get()
                         , new DefaultTrackSelector());
 
-                simpleExoPlayerView.setPlayer(player);
+                mSimpleExoPlayerView.setPlayer(mPlayer);
 
                 String userAgent = Util.getUserAgent(getContext(), getString(R.string.app_name));
                 MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getContext(), userAgent), new DefaultExtractorsFactory(), null, null);
 
-                player.prepare(mediaSource);
-                player.setPlayWhenReady(true);
+                mPlayer.prepare(mediaSource);
+                mPlayer.setPlayWhenReady(true);
 
             }catch (Exception error){
                 System.out.println(error.getMessage());
@@ -105,10 +105,10 @@ public class RecipeStepDetailFragment extends Fragment {
     }
 
     public void showStepAt(int position){
-        if(player!=null){
-            player.stop();
-            player.release();
-            player = null;
+        if(mPlayer!=null){
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer = null;
         }
 
         if(position > (mRecipe.getSteps().size()-1)){
@@ -123,12 +123,12 @@ public class RecipeStepDetailFragment extends Fragment {
         if(mTextRecpipeDetailStep!=null) {
             mTextRecpipeDetailStep.setText(mRecipe.getSteps().get(position).getDescription());
         }
-        if(simpleExoPlayerView!=null) {
+        if(mSimpleExoPlayerView!=null) {
             if(!mRecipe.getSteps().get(position).getVideoURL().isEmpty()) {
-                simpleExoPlayerView.setVisibility(View.VISIBLE);
+                mSimpleExoPlayerView.setVisibility(View.VISIBLE);
                 initializePlayer(Uri.parse(mRecipe.getSteps().get(position).getVideoURL()));
             }else{
-                simpleExoPlayerView.setVisibility(View.GONE);
+                mSimpleExoPlayerView.setVisibility(View.GONE);
             }
         }
     }
@@ -136,37 +136,37 @@ public class RecipeStepDetailFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        if (player!=null) {
-            player.stop();
-            player.release();
+        if (mPlayer!=null) {
+            mPlayer.stop();
+            mPlayer.release();
         }
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (player!=null) {
-            player.stop();
-            player.release();
-            player=null;
+        if (mPlayer!=null) {
+            mPlayer.stop();
+            mPlayer.release();
+            mPlayer=null;
         }
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        if (player!=null) {
-            player.stop();
-            player.release();
+        if (mPlayer!=null) {
+            mPlayer.stop();
+            mPlayer.release();
         }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        if (player!=null) {
-            player.stop();
-            player.release();
+        if (mPlayer!=null) {
+            mPlayer.stop();
+            mPlayer.release();
         }
     }
 }

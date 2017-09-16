@@ -72,11 +72,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/tv_info_steps"
             android:textSize="24sp"
-            android:textColor="#000"
+            android:textColor="@color/black"
             android:layout_weight="1"
             android:gravity="center"
             android:textStyle="bold"
-            android:shadowColor="#fff"
+            android:shadowColor="@color/white"
             android:shadowDx="2"
             android:shadowDy="2"
             android:shadowRadius="10"/>

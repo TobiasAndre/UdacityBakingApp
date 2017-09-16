@@ -15,23 +15,23 @@ import com.tobiasandre.bakingapp.model.Ingredient;
 
 public class IngredientItemView extends LinearLayout {
 
-    TextView quantity;
-    TextView name;
-    TextView unit;
+    private TextView mQuantity;
+    private TextView mName;
+    private TextView mUnit;
 
     public IngredientItemView(Context context) {
         super(context);
 
         View view = inflate(getContext(), R.layout.item_ingredient,this);
-        quantity = (TextView)view.findViewById(R.id.quantity);
-        name = (TextView)view.findViewById(R.id.item_name);
-        unit = (TextView)view.findViewById(R.id.unit);
+        mQuantity = (TextView)view.findViewById(R.id.quantity);
+        mName = (TextView)view.findViewById(R.id.item_name);
+        mUnit = (TextView)view.findViewById(R.id.unit);
     }
 
     public View bind(Ingredient ingredient){
-        quantity.setText(String.valueOf(ingredient.getQuantity()));
-        name.setText(ingredient.getIngredient());
-        unit.setText(ingredient.getMeasure());
+        mQuantity.setText(String.valueOf(ingredient.getQuantity()));
+        mName.setText(ingredient.getIngredient());
+        mUnit.setText(ingredient.getMeasure());
         return this;
     }
 }

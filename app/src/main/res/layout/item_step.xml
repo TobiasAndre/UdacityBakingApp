@@ -17,7 +17,7 @@
             android:minWidth="30sp"
             android:gravity="center"
             android:textSize="18sp"
-            android:textColor="#000"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:id="@+id/number"/>
 
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textSize="18sp"
-            android:textColor="#000"
+            android:textColor="@color/black"
             android:paddingRight="@dimen/min_space"
             android:paddingLeft="@dimen/min_space"
             android:id="@+id/item_name"

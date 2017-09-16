@@ -6,12 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.tobiasandre.bakingapp.ui.PlayerActivity">
 
-
-
     <FrameLayout android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-
 
 </android.support.constraint.ConstraintLayout>

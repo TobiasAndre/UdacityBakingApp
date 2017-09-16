@@ -32,14 +32,12 @@ public class ListWidgetService extends RemoteViewsService  {
         private List<Ingredient> ingredients = new ArrayList<>();
 
         public RemoteViewFactory(Context context, Intent intent) {
-
             this.context = context;
             this.intent = intent;
         }
 
         @Override public void onCreate() {
             Recipe recipe = new Gson().fromJson(intent.getStringExtra(KEY_RECIPE), Recipe.class);
-
             ingredients = recipe.getIngredients();
         }
 

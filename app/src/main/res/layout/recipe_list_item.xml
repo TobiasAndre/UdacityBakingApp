@@ -60,7 +60,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="0dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_53784"
+                android:src="@drawable/ic_ingredients"
                 android:contentDescription="@string/hint_ingredients"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintLeft_toRightOf="@+id/imageView3"

@@ -20,9 +20,7 @@ public class BakingAppWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-
         mRecipe = null;
-
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId,mRecipe);
         }
@@ -30,7 +28,6 @@ public class BakingAppWidget extends AppWidgetProvider {
 
     @Override public void onDeleted(Context context, int[] appWidgetIds) {
         // When the user deletes the widget, delete the preference associated with it.
-
     }
 
     @Override public void onEnabled(Context context) {
@@ -51,6 +48,5 @@ public class BakingAppWidget extends AppWidgetProvider {
             views.setRemoteAdapter(R.id.widget_list, intent);
         }
         appWidgetManager.updateAppWidget(appWidgetId, views);
-
     }
 }
